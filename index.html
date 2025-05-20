@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ariel Tramway</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚡</text></svg>">
+</head>
+<body>
+  <div id="emoji-container"></div>
+  <div class="container mt-5">
+    <div class="text-center">
+      <h1 class="display-4">Ariel Tramway</h1>
+      <p class="lead">Download Ariel Tramway .txt files upto 1 TB!</p>
+    </div>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-6">
+        <form id="uploadForm" class="border p-4 rounded bg-gray">
+          <div class="form-group">
+            <label for="sizeSelect">Output Size:</label>
+            <select name="size" id="sizeSelect" class="form-control">
+              <option value="0.00001">10 KB (For the ones with shitty ass internet)</option>
+              <option value="0.001">1 MB</option>
+              <option value="0.01">10 MB</option>
+              <option value="0.1">100 MB</option>
+              <option value="1" selected="selected">1 GB</option>
+              <option value="10">10 GB</option>
+              <option value="50">50 GB</option>
+              <option value="100">100 GB</option>
+              <option value="500">500 GB</option>
+              <option value="1024">1 TB</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Download</button>
+        </form>
+        <p id="status"class="lead mt-3 text-center"></p>
+      </div>
+    </div>
+  </div>
+  <script src="/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  // Generates 200 tram emojis that bounce around.
+  const container = document.getElementById('emoji-container');
+  const emojisCount = 200;
+  for (let i = 0; i < emojisCount; i++){
+    const span = document.createElement('span');
+    span.className = 'emoji';
+    span.textContent = '🚡';
+    // Random initial position.
+    span.style.top = Math.random() * 100 + 'vh';
+    span.style.left = Math.random() * 100 + 'vw';
+    // Set random animation duration and delay.
+    const duration = 3 + Math.random() * 3;
+    const delay = Math.random() * -5;
+    span.style.animation = `moveAround ${duration}s linear infinite ${delay}s`;
+    // Pause animation to control when all start together.
+    span.style.animationPlayState = 'paused';
+    container.appendChild(span);
+  }
+  
+  // Force a reflow then start all animations simultaneously.
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.emoji').forEach((emoji) => {
+      emoji.style.animationPlayState = 'running';
+    });
+  });
+</script>
+</body>
+</html>
